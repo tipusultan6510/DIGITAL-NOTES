@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-50 text-ink antialiased;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Tiptap note editor content styling */
+.note-prose {
+  @apply text-[15px] leading-relaxed text-ink;
+}
+.note-prose p { @apply my-2; }
+.note-prose h1 { @apply text-xl font-semibold mt-4 mb-2; }
+.note-prose h2 { @apply text-lg font-semibold mt-3 mb-2; }
+.note-prose h3 { @apply text-base font-semibold mt-3 mb-1; }
+.note-prose ul { @apply list-disc pl-5 my-2; }
+.note-prose ol { @apply list-decimal pl-5 my-2; }
+.note-prose a { @apply text-accent-600 underline underline-offset-2; }
+.note-prose strong { @apply font-semibold; }
+.note-prose blockquote { @apply border-l-2 border-accent-400 pl-3 italic text-ink-muted my-2; }
+.note-prose table { @apply w-full border-collapse my-3 text-sm; }
+.note-prose th, .note-prose td { @apply border border-line px-2 py-1 align-top; }
+.note-prose th { @apply bg-navy-50 font-medium text-left; }
+.note-prose ul[data-type='taskList'] { @apply list-none pl-0; }
+.note-prose ul[data-type='taskList'] li { @apply flex items-start gap-2; }
+.note-prose ul[data-type='taskList'] li > label { @apply mt-1; }
+.note-prose img { @apply rounded-lg max-w-full my-2; }
+.note-prose a.file-attachment {
+  @apply inline-flex items-center gap-1.5 no-underline bg-navy-50 text-navy-700 px-2.5 py-1 rounded-lg text-sm my-1;
+}
+.note-prose p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply text-ink-muted float-left h-0 pointer-events-none;
+}
+
+/* Hide scrollbar for the mobile toolbar row without hiding scroll behavior */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
