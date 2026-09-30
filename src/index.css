@@ -39,6 +39,5 @@ body {
   @apply text-ink-muted float-left h-0 pointer-events-none;
 }
 
-/* Hide scrollbar for the mobile toolbar row without hiding scroll behavior */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

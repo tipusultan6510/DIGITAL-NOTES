@@ -52,7 +52,6 @@ export function DataProvider({ children }) {
     return () => { unsubItems(); unsubSections(); unsubNotes(); unsubSettings() }
   }, [uid])
 
-  // Seed sample data exactly once for a brand-new account with nothing in it.
   useEffect(() => {
     if (!uid || loading || seedAttempted.current) return
     if (items.length === 0 && notes.length === 0) {
@@ -61,7 +60,6 @@ export function DataProvider({ children }) {
     }
   }, [uid, loading, items.length, notes.length])
 
-  // ---------- Items ----------
   const addItem = async (groupType, name) => {
     const order = items.filter((i) => i.groupType === groupType).length
     return addDoc(collection(db, 'users', uid, 'items'), {
@@ -82,7 +80,6 @@ export function DataProvider({ children }) {
     await batch.commit()
   }
 
-  // ---------- Sections ----------
   const addSection = async (itemId, name) => {
     const order = sections.filter((s) => s.itemId === itemId).length
     return addDoc(collection(db, 'users', uid, 'sections'), {
@@ -100,7 +97,6 @@ export function DataProvider({ children }) {
     await batch.commit()
   }
 
-  // ---------- Notes ----------
   const addNote = (partial) =>
     addDoc(collection(db, 'users', uid, 'notes'), {
       sectionId: null, itemId: null, groupType: null,
@@ -127,7 +123,6 @@ export function DataProvider({ children }) {
   const updateSettings = (patch) =>
     setDoc(doc(db, 'users', uid, 'meta', 'settings'), patch, { merge: true })
 
-  // ---------- Bulk / settings ----------
   const clearSampleData = async () => {
     const batch = writeBatch(db)
     items.filter((i) => i.isSample).forEach((i) => batch.delete(doc(db, 'users', uid, 'items', i.id)))
@@ -161,7 +156,6 @@ export function DataProvider({ children }) {
     await batch.commit()
   }
 
-  // ---------- Derived helpers ----------
   const value = useMemo(() => ({
     items, sections, notes, loading, settings, updateSettings,
     addItem, renameItem, deleteItem,

@@ -6,9 +6,6 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 
-// Each entry: a top-level item inside a group, with optional sections + notes.
-// This is only ever used to seed a brand new account — nothing here is fixed
-// structure, the user can rename/delete every bit of it.
 const SEED = [
   {
     groupType: 'airlines',
@@ -162,7 +159,6 @@ export async function seedSampleData(uid) {
     }
   }
 
-  // one unorganized quick note, waiting to be filed
   const quickRef = doc(collection(db, 'users', uid, 'notes'))
   batch.set(quickRef, {
     sectionId: null,
